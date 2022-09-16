@@ -28,21 +28,37 @@
     function getweather() {
 
       
-        let cityName = getElementById("cityName").value;
+        let cityName = document.getElementById("cityName").value;
 
     axios.get(`https://api.weatherapi.com/v1/current.json?key=bfa3e631ace145b6832184233220909&q=${cityName}&aqi=no`)
         .then(function (response) {
         
-        let WeatherData = response.data;
+            let weatherData = response.data;
 
-        console.log(response.data);
-        })
-        
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-        
+console.log(weatherData);
+console.log(weatherData.current.humidity);
+console.log(weatherData.current.temp_c);
+
+console.log(weatherData.location.name);
+
+
+let time = weatherData.location.localtime;
+
+let formatedTime = moment(time).format("Do MMMM YYYY, h:mm:ss A")
+
+console.log("Time: ", formatedTime);
+// https://momentjs.com/docs/#/displaying/format/
+
+
+// from now example
+let fromNow = moment("1 august 2022").fromNow();
+console.log("From now: ", fromNow); 
+})
+.catch(function (error) {
+// handle error
+console.log(error);
+})
+
 }
 </script>
 
